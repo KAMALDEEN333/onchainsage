@@ -10,7 +10,7 @@ export class SubscriptionsService {
     [TierLevel.ENTERPRISE]: ['Enterprise features', 'Bulk management', 'Dedicated support'],
   };
 
-  // Activate subscription
+  // Activate subscriptions
   activateSubscription(user_address: string, tier_level: TierLevel, usage_limit: number, durationDays: number): Subscription {
     const now = BigInt(Date.now());
     const end_date = now + BigInt(durationDays * 24 * 60 * 60 * 1000);

@@ -56,16 +56,19 @@ export class SubscriptionsController {
     return this.subscriptionsService.getSubscriptionsByTier(tier);
   }
 
+  // Get the audit log
   @Get('audit-log')
   getAuditLog() {
     return this.subscriptionsService.getAuditLog();
   }
 
+  // Reset usage for a user
   @Post('reset-usage')
   resetUsage(@Body() body: { user_address: string }) {
     return { success: this.subscriptionsService.resetUsage(body.user_address) };
   }
 
+  // post to cancel subscription
   @Post('cancel')
   cancel(@Body() body: { user_address: string }) {
     return { success: this.subscriptionsService.cancelSubscription(body.user_address) };

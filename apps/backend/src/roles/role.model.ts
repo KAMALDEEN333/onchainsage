@@ -10,8 +10,8 @@ export interface Role {
   multi_sig_required?: number; // Number of approvals neededs for critical ops
   audit_log?: string[]; // Audit log for permissions changes with strings
   emergency_controls?: {
-    enabled: boolean;
-    activated_by?: string;
-    activated_at?: Date;
+    enabled: boolean; // Whether emergency controls are active
+    activated_by?: string; // User who activated emergency
+    activated_at?: Date;    // Timestamp when emergency was activated
   };
 }

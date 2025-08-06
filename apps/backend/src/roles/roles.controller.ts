@@ -1,4 +1,4 @@
-// Controller for role management and access control
+// Controller for role managements and access controls
 import { Controller, Post, Body, Param, Delete, Get } from '@nestjs/common';
 import { RolesService } from './roles.service';
 

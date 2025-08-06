@@ -5,7 +5,7 @@ import { RedisService } from './redis.service';
 export class RedisController {
   constructor(private readonly redisService: RedisService) {}
 
-  //route to test cache warmUp
+  //route to test cache warmUps
   @Get('warm-up')
   async warmUpCache() {
     await this.redisService.warmUpCache();

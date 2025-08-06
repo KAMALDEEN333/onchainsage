@@ -1,4 +1,4 @@
-// Service for role-based access control
+// Service for role-based access controls
 import { Role, PermissionBitmask } from './role.model';
 import { UserRole } from './user-role.model';
 

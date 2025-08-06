@@ -8,21 +8,21 @@ export class RolesService {
   private permissionChangeLog: any[] = [];
   private emergencyActive = false;
 
-  // Assign role to user
+  // Assigns role to user
   assignRole(user_id: string, role_id: number, expires_at?: Date): void {
     this.userRoles.push({ user_id, role_id, assigned_at: new Date(), expires_at, is_temporary: !!expires_at });
     this.logPermissionChange('assign', user_id, role_id);
   }
 
-  // Revoke role from user
+  // Revokes role from user
   revokeRole(user_id: string, role_id: number): void {
     this.userRoles = this.userRoles.filter(ur => !(ur.user_id === user_id && ur.role_id === role_id));
     this.logPermissionChange('revoke', user_id, role_id);
   }
 
-  // Check if user has permission
+  // Check if user has permissions
   hasPermission(user_id: string, permission: PermissionBitmask): boolean {
-    if (this.emergencyActive) return true; // Emergency override
+    if (this.emergencyActive) return true; // Emergency override 
     const now = new Date();
     const userRoles = this.userRoles.filter(ur => ur.user_id === user_id && (!ur.expires_at || ur.expires_at > now));
     for (const ur of userRoles) {
@@ -34,26 +34,26 @@ export class RolesService {
     return false;
   }
 
-  // Activate emergency controls
+  // Activates emergency controls
   activateEmergency(): void {
     this.emergencyActive = true;
     this.logPermissionChange('emergency_activate', null, null);
   }
 
-  // Deactivate emergency controls
+  // Deactivates emergency controls
   deactivateEmergency(): void {
     this.emergencyActive = false;
     this.logPermissionChange('emergency_deactivate', null, null);
   }
 
-  // Log permission changes
+  // Logs permission changes
   private logPermissionChange(action: string, user_id: string | null, role_id: number | null): void {
     this.permissionChangeLog.push({ action, user_id, role_id, timestamp: new Date() });
   }
 
   // Admin role management
   isAdmin(user_id: string): boolean {
-    return this.hasPermission(user_id, BigInt(1)); // Example: permission bit 1 is admin
+    return this.hasPermission(user_id, BigInt(1)); // Example: permission bit 1 is admins
   }
 
   // Time-based permission expiration

@@ -1,4 +1,4 @@
-// Middleware for permission enforcement
+// Middleware for permission enforcements
 import { Injectable, NestMiddleware, ForbiddenException } from '@nestjs/common';
 import { RolesService } from './roles.service';
 

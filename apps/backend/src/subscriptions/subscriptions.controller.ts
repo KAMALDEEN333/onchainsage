@@ -45,4 +45,29 @@ export class SubscriptionsController {
   getBenefits(@Param('tier') tier: TierLevel) {
     return this.subscriptionsService.getTierBenefits(tier);
   }
+
+  @Get('status/:user_address')
+  getStatus(@Param('user_address') user_address: string) {
+    return this.subscriptionsService.getSubscriptionStatus(user_address);
+  }
+
+  @Get('report/:tier')
+  getReport(@Param('tier') tier: TierLevel) {
+    return this.subscriptionsService.getSubscriptionsByTier(tier);
+  }
+
+  @Get('audit-log')
+  getAuditLog() {
+    return this.subscriptionsService.getAuditLog();
+  }
+
+  @Post('reset-usage')
+  resetUsage(@Body() body: { user_address: string }) {
+    return { success: this.subscriptionsService.resetUsage(body.user_address) };
+  }
+
+  @Post('cancel')
+  cancel(@Body() body: { user_address: string }) {
+    return { success: this.subscriptionsService.cancelSubscription(body.user_address) };
+  }
 }

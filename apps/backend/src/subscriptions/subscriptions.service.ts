@@ -104,6 +104,29 @@ export class SubscriptionsService {
     return this.tierBenefits[tier] || [];
   }
 
+  // Reset usage for a subscription (admin/enterprise feature)
+  resetUsage(user_address: string): boolean {
+    const sub = this.subscriptions.find(s => s.user_address === user_address);
+    if (sub) {
+      sub.current_usage = 0;
+      this.logAudit(`Usage reset for ${user_address}`);
+      return true;
+    }
+    return false;
+  }
+
+  // Cancel subscription (user-initiated)
+  cancelSubscription(user_address: string): boolean {
+    const sub = this.subscriptions.find(s => s.user_address === user_address && s.is_active);
+    if (sub) {
+      sub.is_active = false;
+      sub.end_date = BigInt(Date.now());
+      this.logAudit(`Subscription cancelled for ${user_address}`);
+      return true;
+    }
+    return false;
+  }
+
   // Query subscription status
   getSubscriptionStatus(user_address: string): Subscription | undefined {
     return this.subscriptions.find(s => s.user_address === user_address);

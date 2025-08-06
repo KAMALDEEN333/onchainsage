@@ -29,7 +29,7 @@ export class SubscriptionsService {
     return sub;
   }
 
-  // Deactivate subscription
+  // Deactivate subscriptions
   deactivateSubscription(user_address: string): boolean {
     const sub = this.subscriptions.find(s => s.user_address === user_address && s.is_active);
     if (sub) {
@@ -40,7 +40,7 @@ export class SubscriptionsService {
     return false;
   }
 
-  // Track usage and enforce limits
+  // Tracks usage and enforces limits
   incrementUsage(user_address: string, amount: number = 1): boolean {
     const sub = this.subscriptions.find(s => s.user_address === user_address && s.is_active);
     if (sub && sub.current_usage + amount <= sub.usage_limit) {
@@ -51,11 +51,11 @@ export class SubscriptionsService {
     return false;
   }
 
-  // Automatic renewal
+  // Automatic renewals
   renewSubscription(user_address: string, durationDays: number): boolean {
     const sub = this.subscriptions.find(s => s.user_address === user_address);
     if (sub && !sub.is_active && BigInt(Date.now()) < sub.end_date + BigInt(7 * 24 * 60 * 60 * 1000)) { // 7-day grace
-      // Payment integration stub
+      // Payments integration stub
       if (!this.processPayment(user_address, sub.tier_level)) {
         this.logAudit(`Payment failed for renewal of ${user_address}`);
         return false;
@@ -70,7 +70,7 @@ export class SubscriptionsService {
     return false;
   }
 
-  // Upgrade/downgrade tier
+  // Upgrade/downgrade tiers
   changeTier(user_address: string, newTier: TierLevel, newLimit: number): boolean {
     const sub = this.subscriptions.find(s => s.user_address === user_address && s.is_active);
     if (sub) {

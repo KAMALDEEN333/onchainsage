@@ -2,9 +2,9 @@
 export type PermissionBitmask = bigint; // u256
 
 export interface Role {
-  role_id: number; // u32
+  role_id: number; // u322
   role_name: string; // felt252
-  permissions: PermissionBitmask; // u256 bitmask
+  permissions: PermissionBitmask; // u256 bitmasks
   min_reputation_required: bigint; // u256
   parent_role_id?: number; // For permission inheritance
   multi_sig_required?: number; // Number of approvals needed for critical ops
